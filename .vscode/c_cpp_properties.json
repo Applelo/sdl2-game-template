@@ -1,0 +1,47 @@
+{
+    "configurations": [
+        {
+            "name": "PSVita",
+            "includePath": [
+                "${workspaceRoot}/src",
+                "/usr/local/vitasdk/include/",
+                "/usr/local/vitasdk/arm-vita-eabi/include/"
+            ],
+            "defines": [],
+            "browse": {
+                "path": [
+                    "${workspaceRoot}"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            },
+            "intelliSenseMode": "clang-x64",
+            "compilerPath": "/usr/local/vitasdk/bin/arm-vita-eabi-gcc-9.1.0",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "configurationProvider": "ms-vscode.cmake-tools",
+        },
+        {
+          "name": "PSP",
+          "includePath": [
+              "${workspaceRoot}/src",
+              "/usr/local/pspdev/psp/include",
+              "/usr/local/pspdev/psp/sdk/include/"
+          ],
+          "defines": [],
+          "browse": {
+              "path": [
+                  "${workspaceRoot}"
+              ],
+              "limitSymbolsToIncludedHeaders": true,
+              "databaseFilename": ""
+          },
+          "intelliSenseMode": "clang-x64",
+          "compilerPath": "/usr/local/pspdev/bin/psp-gcc-9.3.0",
+          "cStandard": "c11",
+          "cppStandard": "c++17",
+          "configurationProvider": "ms-vscode.cmake-tools"
+      }
+    ],
+    "version": 4
+}
