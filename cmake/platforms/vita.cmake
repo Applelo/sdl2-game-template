@@ -5,6 +5,8 @@ else()
 endif()
 
 set(APPLE false)
+set(CMAKE_INCLUDE_PATH "$ENV{VITASDK}/arm-vita-eabi/include")
+set(CMAKE_LIBRARY_PATH "$ENV{VITASDK}/arm-vita-eabi/lib")
 set(SDL2_PATH "$ENV{VITASDK}/arm-vita-eabi")
 set(SDL2_MIXER_PATH "$ENV{VITASDK}/arm-vita-eabi")
 set(SDL2_IMAGE_PATH "$ENV{VITASDK}/arm-vita-eabi")

@@ -4,6 +4,7 @@
 
 ## Requirements
 
+### PSVita
 ### Mac
 
 ```shell
