@@ -1,32 +1,57 @@
-// SDL2 Hello, World!
-// This should display a white screen for 2 seconds
-// compile with: clang++ main.cpp -o hello_sdl2 -lSDL2
-#include <SDL2/SDL.h>
-#define SCREEN_WIDTH 480
-#define SCREEN_HEIGHT 272
+#include "./../platforms/platforms.hpp"
+#include <SDL.h>
 
-int main(int argc, char* args[]) {
-  SDL_Window* window = NULL;
-  SDL_Surface* screenSurface = NULL;
-  if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-    fprintf(stderr, "could not initialize sdl2: %s\n", SDL_GetError());
-    return 1;
+SDL_Window* gWindow = NULL;
+SDL_Renderer* gRenderer = NULL;
+
+SDL_Rect fillRect = { SCREEN_WIDTH / 4,
+                      SCREEN_HEIGHT / 4,
+                      SCREEN_WIDTH / 2,
+                      SCREEN_HEIGHT / 2 };
+
+int
+main(int argc, char* args[])
+{
+  if (SDL_Init(SDL_INIT_VIDEO) < 0)
+    return -1;
+
+  if ((gWindow = SDL_CreateWindow("RedRectangle",
+                                  SDL_WINDOWPOS_UNDEFINED,
+                                  SDL_WINDOWPOS_UNDEFINED,
+                                  SCREEN_WIDTH,
+                                  SCREEN_HEIGHT,
+                                  SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE)) ==
+      NULL)
+    return -1;
+
+  if ((gRenderer = SDL_CreateRenderer(gWindow, -1, 0)) == NULL)
+    return -1;
+
+  SDL_SetRenderDrawColor(gRenderer, 255, 0, 0, 255);
+  SDL_RenderFillRect(gRenderer, &fillRect);
+  SDL_RenderPresent(gRenderer);
+  SDL_Event e;
+  bool quit = false;
+
+  while (!quit) {
+    while (SDL_PollEvent(&e)) {
+      if (e.type == SDL_QUIT) {
+        quit = true;
+      }
+      // if (e.type == SDL_KEYDOWN){
+      //     quit = true;
+      // }
+      // if (e.type == SDL_MOUSEBUTTONDOWN){
+      //     quit = true;
+      // }
+    }
   }
-  window = SDL_CreateWindow(
-			    "hello_sdl2",
-			    SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-			    SCREEN_WIDTH, SCREEN_HEIGHT,
-			    SDL_WINDOW_SHOWN
-			    );
-  if (window == NULL) {
-    fprintf(stderr, "could not create window: %s\n", SDL_GetError());
-    return 1;
-  }
-  screenSurface = SDL_GetWindowSurface(window);
-  SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
-  SDL_UpdateWindowSurface(window);
-  SDL_Delay(2000);
-  SDL_DestroyWindow(window);
+
+  SDL_DestroyRenderer(gRenderer);
+  SDL_DestroyWindow(gWindow);
+  gWindow = NULL;
+  gRenderer = NULL;
+
   SDL_Quit();
   return 0;
 }

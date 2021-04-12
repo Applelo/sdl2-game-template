@@ -1,13 +1,31 @@
 {
     "configurations": [
         {
+            "name": "Mac",
+            "includePath": [
+                "/Library/Frameworks/SDL2_image.framework/Headers",
+                "/Library/Frameworks/SDL2_mixer.framework/Headers",
+                "/Library/Frameworks/SDL2.framework/Headers",
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/platforms/mac"
+            ],
+            "macFrameworkPath": [
+                "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
+            ],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "clang-x64",
+            "configurationProvider": "ms-vscode.cmake-tools"
+        },
+        {
             "name": "PSVita",
             "includePath": [
                 "${workspaceRoot}/src",
                 "/usr/local/vitasdk/include/",
-                "/usr/local/vitasdk/arm-vita-eabi/include/"
+                "/usr/local/vitasdk/arm-vita-eabi/include/",
+                "${workspaceFolder}/platforms/psvita"
             ],
-            "defines": [],
             "browse": {
                 "path": [
                     "${workspaceRoot}"
@@ -19,29 +37,29 @@
             "compilerPath": "/usr/local/vitasdk/bin/arm-vita-eabi-gcc-9.1.0",
             "cStandard": "c11",
             "cppStandard": "c++17",
-            "configurationProvider": "ms-vscode.cmake-tools",
+            "configurationProvider": "ms-vscode.cmake-tools"
         },
         {
-          "name": "PSP",
-          "includePath": [
-              "${workspaceRoot}/src",
-              "/usr/local/pspdev/psp/include",
-              "/usr/local/pspdev/psp/sdk/include/"
-          ],
-          "defines": [],
-          "browse": {
-              "path": [
-                  "${workspaceRoot}"
-              ],
-              "limitSymbolsToIncludedHeaders": true,
-              "databaseFilename": ""
-          },
-          "intelliSenseMode": "clang-x64",
-          "compilerPath": "/usr/local/pspdev/bin/psp-gcc-9.3.0",
-          "cStandard": "c11",
-          "cppStandard": "c++17",
-          "configurationProvider": "ms-vscode.cmake-tools"
-      }
+            "name": "PSP",
+            "includePath": [
+                "${workspaceRoot}/src",
+                "/usr/local/pspdev/psp/include",
+                "/usr/local/pspdev/psp/sdk/include/",
+                "${workspaceFolder}/platforms/psp"
+            ],
+            "browse": {
+                "path": [
+                    "${workspaceRoot}"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            },
+            "intelliSenseMode": "clang-x64",
+            "compilerPath": "/usr/local/pspdev/bin/psp-gcc-9.3.0",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "configurationProvider": "ms-vscode.cmake-tools"
+        }
     ],
     "version": 4
 }

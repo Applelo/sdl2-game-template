@@ -1,0 +1,2 @@
+#define SCREEN_WIDTH 480*2
+#define SCREEN_HEIGHT 272*2
