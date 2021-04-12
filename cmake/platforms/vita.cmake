@@ -4,9 +4,8 @@ else()
   message(FATAL_ERROR "Please define VITASDK to point to your SDK path!")
 endif()
 
-set(APPLE false)
-set(CMAKE_INCLUDE_PATH "$ENV{VITASDK}/arm-vita-eabi/include")
+# prevent to find mac os lib
+set(CMAKE_FIND_USE_CMAKE_SYSTEM_PATH false)
+# Add path to find libs
+set(CMAKE_INCLUDE_PATH "$ENV{VITASDK}/arm-vita-eabi/include" "$ENV{VITASDK}/arm-vita-eabi/include/SDL2")
 set(CMAKE_LIBRARY_PATH "$ENV{VITASDK}/arm-vita-eabi/lib")
-set(SDL2_PATH "$ENV{VITASDK}/arm-vita-eabi")
-set(SDL2_MIXER_PATH "$ENV{VITASDK}/arm-vita-eabi")
-set(SDL2_IMAGE_PATH "$ENV{VITASDK}/arm-vita-eabi")
