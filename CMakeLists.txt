@@ -1,6 +1,7 @@
-cmake_minimum_required(VERSION 3.7)
+cmake_minimum_required(VERSION 3.0)
 project(SDL2Test)
 
+set(MAC false)
 if (VITA)
     include("${VITASDK}/share/vita.cmake" REQUIRED)
     add_definitions(-DVITA)
@@ -33,4 +34,17 @@ target_link_libraries(${PROJECT_NAME}
     ${TMXLITE_LIBRARIES}
     ${SDL2_LIBRARY}
     ${SDL2_IMAGE_LIBRARIES}
+    ${SCE_LIBRARY}
 )
+
+if(VITA)
+    vita_create_self(${PROJECT_NAME}.self ${PROJECT_NAME})
+    vita_create_vpk(${PROJECT_NAME}.vpk ${VITA_TITLEID} ${PROJECT_NAME}.self
+    VERSION ${VITA_VERSION}
+    NAME ${VITA_APP_NAME}
+    FILE platforms/psvita/sce_sys/icon0.png sce_sys/icon0.png
+    FILE platforms/psvita/sce_sys/livearea/contents/bg.png sce_sys/livearea/contents/bg.png
+    FILE platforms/psvita/sce_sys/livearea/contents/startup.png sce_sys/livearea/contents/startup.png
+    FILE platforms/psvita/sce_sys/livearea/contents/template.xml sce_sys/livearea/contents/template.xml
+    )
+endif(VITA)
