@@ -11,6 +11,8 @@ if (VITA)
     set(VITA_APP_NAME "Red Rectangle")
     set(VITA_TITLEID  "VSDK00017")
     set(VITA_VERSION  "01.00")
+    set(VITA_IP "$ENV{VITA_IP}")
+    set(VITA3K_PATH "$ENV{VITA3K_PATH}")
 
     #SCE LIBRARY
     set(SCE_LIBRARY
@@ -61,13 +63,39 @@ target_link_libraries(${PROJECT_NAME}
 )
 
 if(VITA)
-    vita_create_self(${PROJECT_NAME}.self ${PROJECT_NAME})
-    vita_create_vpk(${PROJECT_NAME}.vpk ${VITA_TITLEID} ${PROJECT_NAME}.self
-    VERSION ${VITA_VERSION}
-    NAME ${VITA_APP_NAME}
-    FILE platforms/psvita/sce_sys/icon0.png sce_sys/icon0.png
-    FILE platforms/psvita/sce_sys/livearea/contents/bg.png sce_sys/livearea/contents/bg.png
-    FILE platforms/psvita/sce_sys/livearea/contents/startup.png sce_sys/livearea/contents/startup.png
-    FILE platforms/psvita/sce_sys/livearea/contents/template.xml sce_sys/livearea/contents/template.xml
+    vita_create_self(eboot.bin ${PROJECT_NAME})
+    vita_create_vpk(${PROJECT_NAME}.vpk ${VITA_TITLEID} eboot.bin
+        VERSION ${VITA_VERSION}
+        NAME ${VITA_APP_NAME}
+        FILE platforms/psvita/sce_sys/icon0.png sce_sys/icon0.png
+        FILE platforms/psvita/sce_sys/livearea/contents/bg.png sce_sys/livearea/contents/bg.png
+        FILE platforms/psvita/sce_sys/livearea/contents/startup.png sce_sys/livearea/contents/startup.png
+        FILE platforms/psvita/sce_sys/livearea/contents/template.xml sce_sys/livearea/contents/template.xml
+    )
+
+    add_custom_target(send
+        COMMAND curl -T eboot.bin ftp://${VITA_IP}:1337/ux0:/app/${VITA_TITLEID}/
+        #COMMAND socat udp-recv:18194 stdout
+        DEPENDS eboot.bin
+    )
+
+    add_custom_target(copy
+        COMMAND cp eboot.bin F:/app/${VITA_TITLEID}/eboot.bin
+        DEPENDS eboot.bin
+    )
+
+    add_custom_target(send_vpk
+        COMMAND curl -T ${PROJECT_NAME}.vpk ftp://${VITA_IP}:1337/ux0:/data/
+        DEPENDS ${PROJECT_NAME}.vpk
+    )
+
+    add_custom_target(copy_vpk
+        COMMAND cp ${PROJECT_NAME}.vpk F:/data/${VITA_TITLEID}/${PROJECT_NAME}.vpk
+        DEPENDS ${PROJECT_NAME}.vpk
+    )
+
+    add_custom_target(emulator
+        COMMAND ${VITA3K_PATH} ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.vpk
+        DEPENDS ${PROJECT_NAME}.vpk
     )
 endif(VITA)

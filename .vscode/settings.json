@@ -1,5 +1,9 @@
 {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "xaver.clang-format",
-    "clang-format.executable": "/usr/local/Cellar/clang-format/11.1.0/bin/clang-format"
+    "clang-format.executable": "/usr/local/Cellar/clang-format/11.1.0/bin/clang-format",
+    "cmake.environment": {
+        "VITA_IP": "10.0.0.26",
+        "VITA3K_PATH": "/Applications/Vita3K.app/Contents/MacOS/Vita3K"
+    }
 }
