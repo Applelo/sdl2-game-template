@@ -1,9 +1,32 @@
 cmake_minimum_required(VERSION 3.0)
 project(SDL2Test)
 
-set(MAC false)
 if (VITA)
     include("${VITASDK}/share/vita.cmake" REQUIRED)
+
+    # Add path to find libs
+    set(SDL2_PATH "$ENV{VITASDK}/arm-vita-eabi/include/SDL2")
+
+    #Vita info
+    set(VITA_APP_NAME "Red Rectangle")
+    set(VITA_TITLEID  "VSDK00017")
+    set(VITA_VERSION  "01.00")
+
+    #SCE LIBRARY
+    set(SCE_LIBRARY
+        SDL2
+        SceDisplay_stub
+        SceCtrl_stub
+        SceAudio_stub
+        SceSysmodule_stub
+        SceGxm_stub
+        SceCommonDialog_stub
+        SceAppMgr_stub
+        SceTouch_stub
+        SceHid_stub
+        SceMotion_stub
+        m
+    )
     add_definitions(-DVITA)
 elseif(PSP)
     add_definitions(-DPSP)

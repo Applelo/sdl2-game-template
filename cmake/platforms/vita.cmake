@@ -1,4 +1,5 @@
 # https://raw.githubusercontent.com/vitasdk/vita-toolchain/master/cmake_toolchain/vita.toolchain.cmake
+
 # Copyright (c) 2016, Yifan Lu
 # Based off of Android toolchain file
 # Copyright (c) 2010-2011, Ethan Rublee
@@ -116,32 +117,3 @@ endif()
 if( NOT CMAKE_FIND_ROOT_PATH_MODE_INCLUDE )
   set( CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY )
 endif()
-
-################################
-
-# Add path to find libs
-set(SDL2_PATH "$ENV{VITASDK}/arm-vita-eabi/include/SDL2")
-
-#prevent cmake on mac os to add extra flags
-# set(HAVE_FLAG_SEARCH_PATHS_FIRST 0)
-
-#Vita info
-set(VITA_APP_NAME "Red Rectangle")
-set(VITA_TITLEID  "VSDK00017")
-set(VITA_VERSION  "01.00")
-
-#SCE LIBRARY
-set(SCE_LIBRARY
-  SDL2
-  SceDisplay_stub
-  SceCtrl_stub
-  SceAudio_stub
-  SceSysmodule_stub
-  SceGxm_stub
-  SceCommonDialog_stub
-  SceAppMgr_stub
-  SceTouch_stub
-  SceHid_stub
-  SceMotion_stub
-  m
-)

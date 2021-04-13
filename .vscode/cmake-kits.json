@@ -4,8 +4,7 @@
     "compilers": {
       "C": "/usr/bin/clang",
       "CXX": "/usr/bin/clang++"
-    },
-    "toolchainFile": "${workspaceFolder}/cmake/platforms/mac.cmake"
+    }
   },
   {
     "name": "arm-vita-eabi 9.1.0",
