@@ -11,13 +11,13 @@
     "compilers": {
       "C": "/usr/local/vitasdk/bin/arm-vita-eabi-gcc-9.1.0"
     },
-    "toolchainFile": "${workspaceFolder}/cmake/platforms/vita.cmake"
+    "toolchainFile": "${env:VITASDK}/share/vita.toolchain.cmake"
   },
   {
     "name": "psp 9.3.0",
     "compilers": {
       "C": "/usr/local/pspdev/bin/psp-gcc-9.3.0"
     },
-    "toolchainFile": "${workspaceFolder}/cmake/platforms/psp.cmake"
+    "toolchainFile": "${env:PSPDEV}/psp/share/cmake/PSP.cmake"
   }
 ]

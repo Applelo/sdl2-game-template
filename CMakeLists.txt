@@ -14,8 +14,8 @@ if (VITA)
     set(VITA_IP "$ENV{VITA_IP}")
     set(VITA3K_PATH "$ENV{VITA3K_PATH}")
 
-    #SCE LIBRARY
-    set(SCE_LIBRARY
+    #SCE LIBRARIES
+    set(SCE_LIBRARIES
         SDL2
         SceDisplay_stub
         SceCtrl_stub
@@ -30,8 +30,14 @@ if (VITA)
         m
     )
     add_definitions(-DVITA)
-elseif(PSP)
+elseif(PLATFORM_PSP)
     add_definitions(-DPSP)
+    set(SCE_LIBRARIES
+        m
+        GL
+        pspvram
+        ${PSP_LIBRARIES}
+    )
 else()
     add_definitions(-DMAC)
 endif()
@@ -59,7 +65,7 @@ target_link_libraries(${PROJECT_NAME}
     ${TMXLITE_LIBRARIES}
     ${SDL2_LIBRARY}
     ${SDL2_IMAGE_LIBRARIES}
-    ${SCE_LIBRARY}
+    ${SCE_LIBRARIES}
 )
 
 if(VITA)
@@ -99,3 +105,14 @@ if(VITA)
         DEPENDS ${PROJECT_NAME}.vpk
     )
 endif(VITA)
+
+if(PLATFORM_PSP)
+    create_pbp_file(
+        TARGET ${PROJECT_NAME}
+        ICON_PATH ICON0.PNG
+        BACKGROUND_PATH NULL
+        PREVIEW_PATH NULL
+        TITLE ${PROJECT_NAME}
+    )
+endif(PLATFORM_PSP)
+
